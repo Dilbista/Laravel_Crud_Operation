@@ -12,28 +12,25 @@ use App\Models\Product;
 class ProductController extends Controller
 
 {
-    //compact and redirct product table
+    
 
     public function index()
     {
-        $products = Product::all(); // or paginate(10)
+        $products = Product::all(); 
         return view('productlist.index', compact('products'));
     }
+    //this is for ui call function
     public function create()
     {
-        $products = Product::all(); 
+        $products = Product::all();
         // or paginate(10)
         return view('productlist.create');
     }
-
-
 
     //product are store
 
     public function store(Request $request)
     {
-
-
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -53,35 +50,26 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->save();
 
-        
-return response()->json([
-    'status'  => 200,
-    'message' => 'Product added successfully',
-]);
+
+        return response()->json([
+            'status'  => 200,
+            'message' => 'Product added successfully',
+        ]);
     }
-
-
-
-      public function edit(string $id)
+    //this is for edit ui form call
+    public function edit(string $id)
     {
         //  dd('hello');
         // dd($id);
         $product = product::findorfail($id);
-        
+
         return view('productlist.edit', compact('product'));
     }
 
-
-
     //show all productlist
-
     public function showAllProduct()
     {
         $products = Product::all();
-
-
-
-
         return response()->json([
             'status' => 200,
             'message' => "show all product list",
@@ -91,7 +79,6 @@ return response()->json([
 
 
     //show all product according its id
-
     public function show($id)
     {
         $product = Product::find($id);
@@ -109,9 +96,6 @@ return response()->json([
             'data' => $product,
         ]);
     }
-
-
-
     public function update(Request $request)
     {
         $product = Product::findOrFail($request->id);
@@ -142,10 +126,7 @@ return response()->json([
         return response()->json(['message' => 'Product deleted successfully']);
     }
 
-
-
     //this is delete by product id
-
     public function delete($id)
     {
         $product = Product::find($id);
@@ -155,7 +136,6 @@ return response()->json([
                 'status' => 404,
                 'message' => 'Product not found',
             ]);
-            
         }
 
         $product->delete();
@@ -165,5 +145,4 @@ return response()->json([
             'message' => 'Product deleted successfully',
         ]);
     }
-
 }
