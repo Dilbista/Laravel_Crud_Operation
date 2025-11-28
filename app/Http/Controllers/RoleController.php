@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
@@ -94,5 +95,9 @@ class RoleController extends Controller
     public function destroy(string $id)
     {
         //
+        $role = Role::find($id);
+        $role->delete();
+        return redirect()->route('roles.index')
+            ->with('Danger', 'Role delete successfully');
     }
 }

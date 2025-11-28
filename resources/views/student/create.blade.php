@@ -1,6 +1,8 @@
-@extends('layouts.app')
+@extends('backend.layout.master')
 
 @section('content')
+<div class="content-wrapper">
+
 <div class="container mt-5">
     <h2 class="text-center mb-4">Student Form</h2>
 
@@ -60,4 +62,7 @@
             </div>
     </form>
 </div>
+</div>
+
+
 @endsection

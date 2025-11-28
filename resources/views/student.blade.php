@@ -1,7 +1,9 @@
-@extends('layouts.app')
+@extends('backend.layout.master')
 
 @section('content')
-<div class="container">
+
+<div class="container-wrapper">
+    
     <div class="row justify-content-center">
         <div class="col-md-8">
             @include('student.alert')
